@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="news.css">
+    </head>
+    <body>
+        <div class="navbar">
+         <input type="text" placeholder="Search you news" id="ip">
+         <button onclick="home_news2()" class="btn">Search</button>
+        </div>
+        <div id="search_results"></div>
+    </body>
+    <script >
+        async function home_news(){
+            let app = document.getElementById('search_results');
+            app.innerHTML = null;
+            let res = await fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=446d69c375784b859c4382398f15be17')
+            let data = await res.json();
+            //console.log(data.articles);
+
+            for({urlToImage,title,description,author,pulishedAt} of data.articles){
+                let image = document.createElement('img');
+                image.id="img1";
+                image.src = urlToImage
+               
+                //console.log(image)
+
+                let div = document.createElement('div');
+               
+                div.setAttribute("class","inner_box")
+
+                 let main_div = document.createElement('div');
+                 main_div.id = "inner_div"
+
+                let span = document.createElement('h2');
+                span.innerHTML = title;
+                //console.log(span)
+
+                 let des = document.createElement('p');
+                  des.innerHTML  = description;
+                // console.log(des)
+
+                  let auth = document.createElement('h4');
+                auth.innerHTML = author;
+                // console.log(auth)
+
+
+                let search_res = document.getElementById('search_results');
+
+                main_div.append(span,auth,des)
+                 
+                div.append(image,main_div);
+
+                search_res.append(div);
+            }
+        }
+home_news();
+
+    async function home_news2() {
+         let app = document.getElementById('search_results');
+        app.innerHTML = null;
+        let query = document.getElementById("ip").value
+        let res = await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=446d69c375784b859c4382398f15be17`)
+        let data = await res.json();
+        console.log(data.articles);
+
+        for ({ urlToImage, title, description, author, pulishedAt } of data.articles) {
+            let image = document.createElement('img');
+            image.id = "img1";
+            image.src = urlToImage
+
+            //console.log(image)
+
+            let main_div = document.createElement('div');
+            main_div.id = "inner_div"
+
+            let span = document.createElement('h2');
+            span.innerHTML = title;
+            //console.log(span)
+
+            let des = document.createElement('p');
+            des.innerHTML = description;
+            // console.log(des)
+
+            let auth = document.createElement('h4');
+            auth.innerHTML = author;
+            // console.log(auth)
+
+
+            let search_res = document.getElementById('search_results');
+
+            main_div.append(span, auth, des)
+
+            search_res.append(image, main_div);
+        }
+    }
+    </script>
+</html>

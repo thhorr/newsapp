@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  margin-left: 5px;
+}
+
+#search_results {
+  display: flex;
+  gap: 10px;
+}
+
+.inner_box img {
+  width: 150px;
+  height: 200px;
+  padding: 2%;
+}

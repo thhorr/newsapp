@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="news.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <input type="text" placeholder="Search you news" id="ip">
+        <button onclick="home_news()" class="btn">Search</button>
+    </div>
+    <div id="search_results"></div>
+</body>
+<script>
+    async function home_news() {
+        let query = document.getElementById("ip").value
+        let res = await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=446d69c375784b859c4382398f15be17`)
+        let data = await res.json();
+        console.log(data.articles);
+
+        for ({ urlToImage, title, description, author, pulishedAt } of data.articles) {
+            let image = document.createElement('img');
+            image.src = urlToImage
+
+            //console.log(image)
+
+            let span = document.createElement('span');
+            span.innerHTML = title;
+            //console.log(span)
+
+            let des = document.createElement('p');
+            des.innerHTML = description;
+            // console.log(des)
+
+            let auth = document.createElement('p');
+            auth.innerHTML = author;
+            // console.log(auth)
+
+
+            let search_res = document.getElementById('search_results');
+            search_res.append(image, span, des, auth)
+
+        }
+    }
+   
+</script>
+
+</html>
